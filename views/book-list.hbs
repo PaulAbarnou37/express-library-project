@@ -1,0 +1,15 @@
+<h2>Book List</h2>
+
+<ul>
+  {{#each bookArray}}
+    <li>
+      <h3>{{this.title}}</h3>
+      <p>by {{this.author}}</p>
+
+      <a href="/book/{{this._id}}">See Details</a>
+    </li>
+  {{else}}
+    <!-- with "#each" the "else" only shows if the array is empty -->
+    <li>No books yet...</li>
+  {{/each}}
+</ul>
