@@ -1,6 +1,7 @@
 const express = require('express');
 
 const Book = require("../models/book-model.js");
+const Author = require("../models/author-model.js");
 
 const router = express.Router();
 
@@ -12,6 +13,7 @@ router.get('/', (req, res, next) => {
 
 router.get("/books", (req, res, next) => {
   Book.find()
+    .populate("author") // "author" is the name of the ObjectId field in Book
     .then(bookResults => {
       // send the database results to the template as "bookArray"
       res.locals.bookArray = bookResults;
@@ -32,6 +34,7 @@ router.get("/book/:bookId", (req, res, next) => {
   const { bookId } = req.params;
 
   Book.findById(bookId)
+    .populate("author") // "author" is the name of the ObjectId field in Book
     .then(bookDoc => {
       // send the database result (1) to the template as "bookItem"
       res.locals.bookItem = bookDoc;
@@ -123,6 +126,20 @@ router.post("/book/:bookId/process-review", (req, res, next) => {
       // redirect if it's successful to avoid duplicating the submission
       // (redirect ONLY to URLs - `/book/${bookId}` instead of "book-details.hbs")
       res.redirect(`/book/${bookId}`);
+    })
+    // "next()" means show the error page
+    .catch(err => next(err));
+});
+
+router.get("/author/:authorId", (req, res, next) => {
+  // get the ID from the URL (it's inside of "req.params")
+  const { authorId } = req.params;
+
+  Author.findById(authorId)
+    .then(authorDoc => {
+      // send the database result (1) to the template as "authorItem"
+      res.locals.authorItem = authorDoc;
+      res.render("author-details.hbs");
     })
     // "next()" means show the error page
     .catch(err => next(err));

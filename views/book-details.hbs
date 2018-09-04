@@ -1,6 +1,11 @@
 <h2>{{bookItem.title}}</h2>
 
-<p>by {{bookItem.author}}</p>
+<p>
+  by
+  <a href="/author/{{bookItem.author._id}}">
+    {{bookItem.author.firstName}} {{bookItem.author.lastName}}
+  </a>
+</p>
 <p>{{bookItem.description}}</p>
 
 <p>Rated {{bookItem.rating}} / 10</p>

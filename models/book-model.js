@@ -7,7 +7,11 @@ const bookSchema = new Schema({
   // document structure & rules defined here
   title: { type: String, required: true },
   description: { type: String, minlength: 8 },
-  author: { type: String, required: true },
+  author: {
+    type: Schema.Types.ObjectId,
+    ref: "Author", // tells Mongoose that this ID connects to the "Author" model
+    required: true
+  },
   rating: { type: Number, min: 0, max: 10 },
   reviews: [{
     user: { type: String, required: true },

@@ -6,7 +6,12 @@
   {{#each bookArray}}
     <li>
       <h3>{{this.title}}</h3>
-      <p>by {{this.author}}</p>
+      <p>
+        by
+        <a href="/author/{{this.author._id}}">
+          {{this.author.firstName}} {{this.author.lastName}}
+        </a>
+      </p>
 
       <a href="/book/{{this._id}}">See Details</a>
     </li>
