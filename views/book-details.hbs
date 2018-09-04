@@ -5,3 +5,34 @@
 
 <p>Rated {{bookItem.rating}} / 10</p>
 <p>Added on {{bookItem.createdAt}}</p>
+
+<a href="/book/{{bookItem._id}}/edit">Edit This Book</a>
+<a href="/book/{{bookItem._id}}/delete">Delete This Book</a>
+
+<hr />
+
+<section>
+  <h3>Reviews</h3>
+
+  <h4>Add a Review</h4>
+  <form action="/book/{{bookItem._id}}/process-review" method="POST">
+    <input type="text" name="user" placeholder="Your name..." />
+    <br />
+
+    <input type="text" name="comments" placeholder="Comments..." />
+    <br />
+
+    <button>Submit Review</button>
+  </form>
+
+  <ul>
+    {{#each bookItem.reviews}}
+      <li>
+        <p><b>{{this.user}}</b> says:</p>
+        <p>{{this.comments}}</p>
+      </li>
+    {{else}}
+      <li>No reviews yet. Be the first to write one!</li>
+    {{/each}}
+  </ul>
+</section>

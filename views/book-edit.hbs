@@ -1,0 +1,24 @@
+<h2>Edit a Book</h2>
+
+<!-- insert the book ID in the processing URL -->
+<form action="/book/{{bookItem._id}}/process-edit" method="POST">
+  <input type="text" name="title" value="{{bookItem.title}}"
+      placeholder="Enter a title..." />
+  <br />
+
+  <input type="text" name="author" value="{{bookItem.author}}"
+      placeholder="Author..." />
+  <br />
+
+  <input type="text" name="description" value="{{bookItem.description}}"
+      placeholder="Description (8 characters or more)..." />
+  <br />
+
+  <input type="number" name="rating" value="{{bookItem.rating}}"
+      placeholder="Rating (0-10)..." />
+  <br />
+
+  <button>Save Changes</button>
+</form>
+
+<a href="/book/{{bookItem._id}}">Cancel Edit</a>

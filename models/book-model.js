@@ -9,6 +9,10 @@ const bookSchema = new Schema({
   description: { type: String, minlength: 8 },
   author: { type: String, required: true },
   rating: { type: Number, min: 0, max: 10 },
+  reviews: [{
+    user: { type: String, required: true },
+    comments: { type: String, required: true, maxlength: 200 }
+  }]
 }, {
   // additional settings for Schema constructor function (class)
   timestamps: true
